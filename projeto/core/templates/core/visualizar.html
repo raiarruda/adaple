@@ -1,0 +1,29 @@
+{% extends 'core/base.html' %} {% block content %} {% load embed_video_tags %}
+<div class="container">
+
+    <div class="row" style="border: 1px">
+        <p> Nome:
+        {{edp}} </p>
+       <p></p> Objetivo:
+         {{edp.objetivo_pedagogigo}}</p>
+        Video:
+        <p></p>
+        {% video edp.video as my_video %}
+        <div>
+            <br>{% video my_video 'tiny' %} </div>
+
+        {% endvideo %}
+
+        
+    </div>
+
+
+
+
+</div>
+<a href="{% url 'edp_nova' %}"><button class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Nova EDP</button></a>
+
+</div>
+
+</div>
+{% endblock content %}
