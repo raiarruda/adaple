@@ -55,7 +55,7 @@ def add_recurso_edp(request,pk):
 def visualizarEDP (request, pk):
     assert isinstance(request, HttpRequest)
 
-    edp = db_edp.objects.all().get(pk=pk)
+   
     
     recursos = db_recursos.objects.all.get(edp=edp.nome)
 
