@@ -5,8 +5,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 
 
-from .models import db_edp, db_edp_aluno
-from .forms import form_edp, form_edp_aluno
+from .models import db_edp, db_edp_aluno, db_recursos
+from .forms import form_edp, form_edp_aluno, form_add_recursos_edp
 # Create your views here.
 
 
@@ -25,20 +25,45 @@ def edp_nova(request):
             edp.usuario = request.user
             edp.save()
 
-            return redirect('inicio')
+            return redirect('add_recurso')
         else:
             return redirect('inicio')
     else:
         form = form_edp()
     return render( request, 'core/edp_nova.html', {'form':form})
 
+def add_recurso_edp(request,pk):
+    assert isinstance(request, HttpRequest)
+
+    edp = db_edp.objects.all().get(pk=pk)
+
+    if request.method == "POST":
+        form = form_add_recursos_edp(request.POST)
+        if form.is_valid():
+            recursos = form.save(commit=False)
+            recursos.edp = edp
+            recursos.save()
+
+            return redirect('add_recurso')
+        else:
+            return redirect('inicio')
+    else:
+        form = form_edp()
+    return render( request, 'core/add_recurso_edp.html', {'form':form})
+
 
 def visualizarEDP (request, pk):
     assert isinstance(request, HttpRequest)
 
     edp = db_edp.objects.all().get(pk=pk)
+    
+    recursos = db_recursos.objects.all.get(edp=edp.nome)
 
-    return render (request, 'core/visualizar.html', {'title': 'Visualizar EDP','edp': edp })
+
+
+    return render (request, 'core/visualizar.html', {'title': 'Visualizar EDP','edp': edp, 'recursos':recursos })
+
+
 
 def responderEDP (request, pk):
 

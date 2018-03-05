@@ -19,31 +19,13 @@ class db_edp(models.Model):
     usuario = models.ForeignKey(User,on_delete=models.DO_NOTHING,)
 
 
-    # # escolha do professor
-    # player_video = models.NullBooleanField(blank=True, null=True)
-    # #isso só deve ter caso player_video seja True
-    # video = EmbedVideoField(blank=True, null=True)
-    
-    # anotacao_texto = models.NullBooleanField(blank=True, null=True)
-    # texto = models.TextField(blank=True, null=True)
-    
-    # player_audio = models.NullBooleanField(blank=True, null=True)
-    
-    # player_imagem = models.NullBooleanField(blank=True, null=True)
-    
-    # carregar_video = models.NullBooleanField(blank=True, null=True)
-    
-    # carregar_audio = models.NullBooleanField(blank=True, null=True)
-    
-    # carregar_imagem = models.NullBooleanField(blank=True, null=True)
-
     def iniciar(self):
         self.save()
 
     def __str__ (self):
         return self.nome
     
-class recursos (models.Model):
+class db_recursos (models.Model):
     edp = models.ForeignKey(db_edp, on_delete=models.DO_NOTHING)
 
     #escolha do professor

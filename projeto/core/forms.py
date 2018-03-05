@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm
 from django.utils.translation import ugettext_lazy as _
-from .models import db_edp, db_habilidades, db_edp_aluno
+from .models import db_edp, db_habilidades, db_edp_aluno, db_recursos
 from embed_video.fields import EmbedVideoField
 
 skills_choice = (( 'tradução', 'tradução'), ('escrita','escrita'), ('leitura', 'leitura'))
@@ -28,6 +28,11 @@ class form_edp(forms.ModelForm):
          model = db_edp
        
          fields = ('nome', )
+
+class form_add_recursos_edp(forms.ModelForm):
+    class Meta:
+        model=db_recursos
+        fields = ('texto',)
 
 
 class form_edp_aluno(forms.ModelForm):
