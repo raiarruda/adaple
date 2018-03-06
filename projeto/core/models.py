@@ -24,7 +24,7 @@ class db_edp(models.Model):
 
     def __str__ (self):
         return self.nome
-    
+   
 class db_recursos (models.Model):
     edp = models.ForeignKey(db_edp, on_delete=models.DO_NOTHING)
 

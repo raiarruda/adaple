@@ -55,10 +55,11 @@ def add_recurso_edp(request,pk):
 def visualizarEDP (request, pk):
     assert isinstance(request, HttpRequest)
 
-   
+    edp = db_edp.objects.all().get(pk=pk)
+    habilidades = edp.habilidades
     
-    recursos = db_recursos.objects.all.get(edp=edp.nome)
-
+   # recursos = db_recursos.objects.all().get(edp=edp)
+    recursos = db_recursos.objects.all().get(edp=edp)
 
 
     return render (request, 'core/visualizar.html', {'title': 'Visualizar EDP','edp': edp, 'recursos':recursos })

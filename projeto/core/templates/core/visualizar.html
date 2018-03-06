@@ -6,20 +6,25 @@
         {{edp}} </p>
        <p></p> Objetivo:
          {{edp.objetivo_pedagogigo}}</p>
-        Video:
-        <p></p>
-        {% video edp.video as my_video %}
-        <div>
-            <br>{% video my_video 'tiny' %} </div>
-
-        {% endvideo %}
+            
+        {{edp.habilidades}}
         
     </div>
 
     <div class="row" style="border: 1px">
-       {% for r in recursos %} 
-       {{recursos}}
-       {% endfor %}
+    
+       {% video recursos.video as my_video %}
+       <div>
+           <br>{% video my_video 'tiny' %} </div>
+
+       {% endvideo %}
+      
+       {{recursos.texto}}
+       
+       {{recursos.player_audio}}
+  
+
+
     </div>
 
 
