@@ -3,7 +3,40 @@
 
     <div class="row">
         <div class="panel" style="width: 25%;display: inline-block">
+            {% for group in user.groups.all %} {% if group.name == 'aluno' %}
 
+            <table class="table">
+                <thead class="thead thead-danger">
+                    <tr>
+                        <th>Título</th>
+                        <th>Visualização Aluno</th>
+                    </tr>
+                </thead>
+                <div class="panel-body">
+                    <tbody>
+                        {% for edp in edps %}
+                        <tr>
+                            <th scope="row">{{edp.nome}}</th>
+
+
+                            <td>
+                                <a class="btn btn-default" href="{% url 'edp_responder' pk=edp.pk %}">Entrar</a>
+                            </td>
+
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+
+
+            </table>
+
+            {% endif %} {% endfor %}
+            {% for group in user.groups.all %} {% if group.name == 'professor' %}
+
+            <a href="{% url 'edp_nova' %}">
+                <button class="btn btn-success">
+                    <span class="glyphicon glyphicon-plus"></span> Nova EDP</button>
+            </a>
             <table class="table">
                 <thead class="thead thead-danger">
                     <tr>
@@ -33,42 +66,16 @@
 
 
             </table>
+
+     
+
+            {% endif %} {% endfor %}
+            <!--for do grupo e if do grupo-->
+
             </div>
 
 
-        </div>
-
-
-        <div class="row">
-            <div class="panel">
-                {% for edp in edps %}
-
-                <!--        <div class="row" style="border: 1px">
-                    Nome:
-                    <p> {{edp}} </p>
-                    Objetivo:
-                    <p> {{edp.objetivo_pedagogigo}}</p>
-                    Video:
-                    <p></p>
-                    {% video edp.video as my_video %}
-                    <div>
-                        <br>{% video my_video 'tiny' %} </div>
-
-                    {% endvideo %}
-                </div>
-
-
-                {% endfor %}
-
-
-
-            --></div>
-            <a href="{% url 'edp_nova' %}">
-                <button class="btn btn-success">
-                    <span class="glyphicon glyphicon-plus"></span> Nova EDP</button>
-            </a>
+            </div>
 
         </div>
-
-    </div>
-    {% endblock content %}
+        {% endblock content %}

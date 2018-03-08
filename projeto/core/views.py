@@ -5,10 +5,11 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 
 
-from .models import db_edp, db_edp_aluno, db_recursos
-from .forms import form_edp, form_edp_aluno, form_add_recursos_edp
+from .models import db_edp, db_edp_aluno
+#, db_recursos
+from .forms import form_edp, form_edp_aluno
+#, form_add_recursos_edp
 # Create your views here.
-
 
 def inicio(request):
     edps = db_edp.objects.all()
@@ -16,21 +17,22 @@ def inicio(request):
     return render(request, 'core/inicio.html', {'title': 'Estruturas Digitais Pedagogicas','edps':edps})
 
 
-
 def edp_nova(request):
     if request.method == "POST":
         form = form_edp(request.POST)
         if form.is_valid():
+           
             edp = form.save(commit=False)
             edp.usuario = request.user
             edp.save()
 
-            return redirect('add_recurso')
+            return redirect('inicio')
         else:
             return redirect('inicio')
     else:
         form = form_edp()
     return render( request, 'core/edp_nova.html', {'form':form})
+
 
 def add_recurso_edp(request,pk):
     assert isinstance(request, HttpRequest)
@@ -44,7 +46,7 @@ def add_recurso_edp(request,pk):
             recursos.edp = edp
             recursos.save()
 
-            return redirect('add_recurso')
+            return redirect('inicio')
         else:
             return redirect('inicio')
     else:
